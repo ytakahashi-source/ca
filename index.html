@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<title>JK_CP 立ち上げロードマップ — 最短で月5決定・売上1,000万</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: light only;
+  --blue-deep:#16314D; --blue-line:#2D6BA8; --blue-pale:#E8EFF6;
+  --paper:#FFFFFF; --ink:#1A2530; --ink-soft:#4B5B68;
+  --orange:#E8590C; --grid:#DCE4EA;
+  --ok:#1F7A4D; --warn:#B7791F; --bad:#B33A3A; --radius:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{-webkit-text-size-adjust:100%;}
+body{font-family:'Noto Sans JP',sans-serif;background:#FFFFFF;color:#1A2530;line-height:1.75;font-size:15px;}
+.mono{font-family:'IBM Plex Mono',monospace;font-feature-settings:"tnum";}
+a{color:var(--blue-line);}
+
+header{
+  background:var(--blue-deep);
+  background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:28px 28px;color:#fff;padding:28px 20px 22px;position:relative;overflow:hidden;
+}
+.h-inner{max-width:1020px;margin:0 auto;position:relative;}
+.h-eyebrow{font-size:11px;letter-spacing:.22em;color:#A9C4DC;border:1px solid rgba(169,196,220,.5);display:inline-block;padding:3px 10px;margin-bottom:12px;}
+h1{font-family:'Noto Sans JP',sans-serif;font-weight:900;font-size:clamp(21px,4.6vw,30px);line-height:1.4;letter-spacing:.04em;}
+.h-sub{margin-top:8px;font-size:13px;color:#C4D6E6;max-width:640px;}
+.stamp{position:absolute;right:0;top:0;width:84px;height:84px;border:3px solid var(--orange);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--orange);font-family:'Noto Sans JP',sans-serif;font-weight:900;font-size:15px;line-height:1.3;text-align:center;transform:rotate(8deg);background:rgba(232,89,12,.06);}
+@media(max-width:560px){.stamp{width:68px;height:68px;font-size:12px;}}
+
+nav{position:sticky;top:0;z-index:50;background:#fff;border-bottom:2px solid var(--blue-deep);box-shadow:0 2px 8px rgba(22,49,77,.06);}
+.tabs{display:flex;flex-wrap:wrap;gap:4px;max-width:1020px;margin:0 auto;padding:8px 16px;}
+@media(max-width:680px){
+  nav{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .tabs{flex-wrap:nowrap;min-width:max-content;}
+}
+.tab{padding:9px 14px;font-size:13px;font-weight:700;color:var(--ink-soft);border:none;background:#EEF1F4;cursor:pointer;white-space:nowrap;border-radius:8px;font-family:inherit;transition:background .15s,color .15s;}
+.tab:hover{background:var(--blue-pale);color:var(--blue-deep);}
+.tab.active{color:#fff;background:var(--blue-deep);}
+.tab:focus-visible{outline:2px solid var(--orange);outline-offset:1px;}
+main{max-width:1020px;margin:0 auto;padding:24px 16px 80px;background:#FFFFFF;}
+.panel{display:none;}
+.panel.active{display:block;}
+.sec-title{font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:20px;color:var(--blue-deep);display:flex;align-items:center;gap:10px;margin:8px 0 6px;}
+.sec-title::before{content:"";width:14px;height:14px;background:var(--blue-deep);clip-path:polygon(0 0,100% 0,100% 100%);flex-shrink:0;}
+.sec-lead{font-size:13.5px;color:var(--ink-soft);margin-bottom:18px;}
+.h3line{font-size:14px;font-weight:700;color:var(--blue-deep);letter-spacing:.06em;margin:26px 0 10px;display:flex;align-items:center;gap:10px;}
+.h3line::after{content:"";flex:1;height:1px;background:var(--grid);}
+
+/* ===== KPI ===== */
+.goalbar{background:#fff;border:1.5px solid var(--blue-deep);border-radius:var(--radius);padding:16px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:14px;}
+.goalbar .g{flex:1;min-width:120px;}
+.goalbar label{font-size:11px;font-weight:700;color:var(--ink-soft);letter-spacing:.08em;display:block;}
+.goalbar .val{font-size:24px;font-weight:600;}
+.goalbar input{width:90px;font-size:20px;font-family:'IBM Plex Mono',monospace;font-weight:600;border:none;border-bottom:2px solid var(--blue-line);background:transparent;color:var(--blue-deep);padding:2px 0;}
+.goalbar .rev{font-family:'Noto Sans JP',sans-serif;font-weight:900;color:var(--orange);font-size:26px;}
+.kpi-headline{background:#FDF3EC;border:1.5px solid var(--orange);border-radius:var(--radius);padding:12px 16px;font-size:13.5px;margin-bottom:18px;display:flex;flex-wrap:wrap;gap:6px 22px;}
+.kpi-headline b{color:var(--orange);font-family:'IBM Plex Mono',monospace;font-size:16px;}
+.funnel{background:#fff;border:1px solid var(--grid);border-radius:var(--radius);overflow:hidden;margin-bottom:16px;}
+.f-row{display:grid;grid-template-columns:128px 1fr 92px 96px;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px dashed var(--grid);}
+.f-row:last-child{border-bottom:none;}
+.f-row.head{background:var(--blue-pale);font-size:11px;font-weight:700;color:var(--ink-soft);padding:8px 14px;}
+.f-name{font-size:13.5px;font-weight:700;}
+.f-name small{display:block;font-weight:400;font-size:10.5px;color:var(--ink-soft);}
+.f-bar-wrap{height:18px;background:var(--blue-pale);border-radius:3px;overflow:hidden;}
+.f-bar{height:100%;background:linear-gradient(90deg,var(--blue-line),var(--blue-deep));border-radius:3px;min-width:3px;transition:width .25s;}
+.f-rate{text-align:right;}
+.f-rate input{width:56px;text-align:right;font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;border:1px solid var(--grid);border-radius:5px;padding:3px 5px;color:var(--blue-deep);}
+.f-rate small{display:block;font-size:9.5px;color:var(--ink-soft);}
+.f-num{font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;text-align:right;}
+.f-num small{font-size:10px;color:var(--ink-soft);font-family:'Noto Sans JP';font-weight:400;display:block;}
+.f-row.goal{background:#FDF3EC;}
+.f-row.goal .f-num{color:var(--orange);}
+.sub-funnel{background:#fff;border:1px solid var(--grid);border-left:4px solid var(--blue-line);border-radius:var(--radius);margin-bottom:14px;overflow:hidden;}
+.sub-funnel h3{font-size:13px;font-weight:700;color:var(--blue-deep);padding:11px 14px 0;letter-spacing:.05em;}
+.sub-funnel .sf-note{font-size:11.5px;color:var(--ink-soft);padding:2px 14px 8px;}
+.sf-row{display:grid;grid-template-columns:1fr 92px 84px;align-items:center;gap:8px;padding:8px 14px;border-top:1px dashed var(--grid);font-size:13px;}
+.sf-row .sf-name{font-weight:500;}
+.sf-row .sf-name small{color:var(--ink-soft);font-size:10.5px;display:block;}
+.sf-rate{text-align:right;}
+.sf-rate input{width:56px;text-align:right;font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;border:1px solid var(--grid);border-radius:5px;padding:2px 5px;color:var(--blue-deep);}
+.sf-num{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;text-align:right;}
+.recon{padding:10px 14px;background:var(--blue-pale);font-size:12px;border-top:1px solid var(--grid);}
+.recon b{font-family:'IBM Plex Mono',monospace;}
+.recon .gap-bad{color:var(--bad);font-weight:700;}
+.recon .gap-ok{color:var(--ok);font-weight:700;}
+.daily{margin-top:4px;background:var(--blue-deep);color:#fff;border-radius:var(--radius);padding:16px;display:flex;flex-wrap:wrap;gap:18px;}
+.daily .d{flex:1;min-width:130px;}
+.daily label{font-size:11px;color:#A9C4DC;letter-spacing:.1em;display:block;}
+.daily .v{font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:600;}
+.kpi-note{font-size:12.5px;color:var(--ink-soft);margin-top:12px;line-height:1.8;}
+.diag-row{display:flex;gap:12px;align-items:flex-start;padding:10px 12px;border-radius:8px;background:var(--blue-pale);margin-bottom:8px;font-size:13.5px;cursor:pointer;border:1.5px solid transparent;}
+.diag-row:hover{border-color:var(--blue-line);}
+.diag-kpi{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;background:var(--bad);color:#fff;border-radius:4px;padding:2px 8px;flex-shrink:0;margin-top:2px;white-space:nowrap;}
+.diag-row .arrow{color:var(--ink-soft);flex-shrink:0;margin-top:2px;}
+.diag-target b{color:var(--blue-deep);}
+.diag-target small{display:block;font-size:11.5px;color:var(--ink-soft);}
+@media(max-width:680px){
+  .f-row{grid-template-columns:100px 1fr 74px 78px;padding:10px 10px;}
+  .f-num{font-size:14px;}
+  .sf-row{grid-template-columns:1fr 78px 70px;padding:8px 10px;}
+}
+
+/* ===== マイルストーン ===== */
+table.ms{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--grid);border-radius:var(--radius);overflow:hidden;font-size:12.5px;margin-bottom:16px;}
+.ms th{background:var(--blue-deep);color:#fff;font-size:11px;letter-spacing:.06em;padding:9px 8px;text-align:center;white-space:nowrap;}
+.ms td{padding:9px 8px;border-bottom:1px solid var(--grid);vertical-align:top;text-align:center;}
+.ms td:first-child{font-weight:700;white-space:nowrap;color:var(--blue-deep);text-align:left;}
+.ms td.q{text-align:left;font-size:11.5px;color:var(--ink-soft);min-width:160px;}
+.ms tr:last-child td{border-bottom:none;}
+.ms .num{font-family:'IBM Plex Mono',monospace;font-weight:600;}
+.ms-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.gradstep{background:#fff;border:1px solid var(--grid);border-left:4px solid var(--orange);border-radius:var(--radius);padding:13px 16px;margin-bottom:10px;font-size:13.5px;}
+.gradstep b{color:var(--blue-deep);display:block;margin-bottom:3px;}
+.gradstep ul{list-style:none;}
+.gradstep li{padding-left:14px;position:relative;color:var(--ink-soft);font-size:13px;}
+.gradstep li::before{content:"・";position:absolute;left:0;}
+.guin{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:8px;}
+.guin .g{background:var(--blue-deep);color:#fff;border-radius:var(--radius);padding:14px;}
+.guin label{font-size:11px;color:#A9C4DC;display:block;letter-spacing:.06em;}
+.guin .v{font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:600;}
+
+/* ===== フェーズ ===== */
+.ph-group{font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--blue-line);margin:22px 0 8px;display:flex;align-items:center;gap:10px;}
+.ph-group::after{content:"";flex:1;height:1px;background:var(--grid);}
+.flow-strip{display:flex;flex-wrap:wrap;gap:4px;align-items:center;padding:14px 16px;background:#fff;border:1px solid var(--grid);border-radius:var(--radius);margin-bottom:14px;}
+.flow-chip{font-size:11.5px;font-weight:700;background:var(--blue-pale);color:var(--blue-deep);border-radius:4px;padding:4px 8px;white-space:nowrap;cursor:pointer;border:1px solid transparent;font-family:inherit;}
+.flow-chip:hover{border-color:var(--blue-line);}
+.flow-arrow{color:var(--ink-soft);font-size:11px;}
+.phase{background:#fff;border:1px solid var(--grid);border-left:4px solid var(--blue-line);border-radius:var(--radius);margin-bottom:12px;overflow:hidden;}
+.p-head{width:100%;display:flex;align-items:center;gap:12px;padding:14px 16px;background:none;border:none;cursor:pointer;text-align:left;font-family:inherit;}
+.p-no{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:var(--blue-line);min-width:26px;}
+.p-name{font-size:15.5px;font-weight:700;color:var(--ink);flex:1;}
+.p-name small{display:block;font-size:11px;font-weight:400;color:var(--ink-soft);}
+.p-score{font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--blue-pale);color:var(--ink-soft);white-space:nowrap;}
+.p-arrow{color:var(--ink-soft);transition:transform .2s;font-size:12px;}
+.phase.open .p-arrow{transform:rotate(90deg);}
+.p-body{display:none;padding:0 16px 18px;}
+.phase.open .p-body{display:block;}
+.daiji{background:#FDF3EC;border-left:4px solid var(--orange);border-radius:0 8px 8px 0;padding:11px 14px;margin-top:12px;}
+.daiji .dj-label{font-size:10.5px;font-weight:700;letter-spacing:.14em;color:var(--orange);margin-bottom:3px;}
+.daiji ul{list-style:none;}
+.daiji li{font-size:13.5px;font-weight:600;padding-left:16px;position:relative;}
+.daiji li::before{content:"◆";position:absolute;left:0;color:var(--orange);font-size:10px;top:5px;}
+.lt-badge{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;background:var(--blue-deep);color:#fff;border-radius:4px;padding:3px 10px;margin:10px 8px 0 0;}
+.lt-badge span{font-family:'IBM Plex Mono',monospace;}
+.blk{margin-top:14px;}
+.blk-label{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--blue-deep);display:flex;align-items:center;gap:6px;margin-bottom:6px;}
+.blk-label::before{content:"";width:8px;height:8px;background:var(--blue-line);flex-shrink:0;}
+.blk-label.talk::before{background:var(--orange);}
+.blk-label.man::before{background:var(--ok);}
+.blk p{font-size:13.5px;color:var(--ink);}
+.chk{list-style:none;}
+.chk li{margin-bottom:6px;}
+.chk label{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;cursor:pointer;padding:7px 9px;border-radius:6px;background:var(--blue-pale);}
+.chk input{margin-top:4px;accent-color:var(--blue-deep);width:16px;height:16px;flex-shrink:0;}
+.chk label.done{background:#E6F2EB;color:var(--ok);text-decoration:line-through;}
+.talkbox{background:#FFF9F4;border:1px dashed var(--orange);border-radius:8px;padding:12px 14px;font-size:13.5px;}
+.man-list{list-style:none;}
+.man-list li{margin-bottom:5px;}
+.man-list a{display:flex;gap:8px;align-items:flex-start;font-size:13px;text-decoration:none;padding:7px 10px;border-radius:6px;background:#F0F6F2;border:1px solid transparent;color:var(--ink);}
+.man-list a:hover{border-color:var(--ok);}
+.man-list .ic{flex-shrink:0;color:var(--ok);font-size:12px;margin-top:2px;}
+.man-list .mt{font-weight:600;}
+.man-list .mp{display:block;font-size:11px;color:var(--ink-soft);font-weight:400;}
+.rate{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
+.rate button{font-family:inherit;font-size:12px;font-weight:700;padding:6px 12px;border-radius:20px;border:1.5px solid var(--grid);background:#fff;color:var(--ink-soft);cursor:pointer;}
+.rate button.sel-3{background:var(--ok);border-color:var(--ok);color:#fff;}
+.rate button.sel-2{background:#3D8E66;border-color:#3D8E66;color:#fff;}
+.rate button.sel-1{background:var(--warn);border-color:var(--warn);color:#fff;}
+.rate button.sel-0{background:var(--bad);border-color:var(--bad);color:#fff;}
+
+/* ===== 1日の使い方 ===== */
+.timeline{position:relative;margin:6px 0 20px;padding-left:26px;}
+.timeline::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:var(--blue-line);}
+.tl-item{position:relative;background:#fff;border:1px solid var(--grid);border-radius:var(--radius);padding:13px 16px;margin-bottom:12px;}
+.tl-item::before{content:"";position:absolute;left:-23px;top:18px;width:12px;height:12px;border-radius:50%;background:var(--orange);border:3px solid var(--paper);}
+.tl-time{font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;color:var(--orange);letter-spacing:.06em;}
+.tl-item h4{font-size:14.5px;font-weight:700;color:var(--blue-deep);margin:2px 0 6px;}
+.tl-item p,.tl-item li{font-size:13px;color:var(--ink);}
+.tl-item ul{list-style:none;margin-top:4px;}
+.tl-item li{padding-left:14px;position:relative;color:var(--ink-soft);}
+.tl-item li::before{content:"・";position:absolute;left:0;}
+.must-card{background:#fff;border:1px solid var(--grid);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;}
+.must-head{width:100%;display:flex;align-items:center;gap:10px;padding:12px 16px;background:none;border:none;cursor:pointer;text-align:left;font-family:inherit;}
+.must-head .mn{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:#fff;background:var(--blue-line);border-radius:4px;padding:2px 7px;flex-shrink:0;}
+.must-head .mt2{font-size:14px;font-weight:700;flex:1;}
+.must-body{display:none;padding:0 16px 14px;font-size:13px;color:var(--ink);}
+.must-card.open .must-body{display:block;}
+.must-body p{margin-bottom:6px;line-height:1.7;}
+.must-lead{font-size:12px;font-weight:800;color:var(--blue-deep);margin-bottom:8px!important;}
+.must-points{list-style:none;counter-reset:mp;display:flex;flex-direction:column;gap:6px;margin:0 0 8px;}
+.must-points li{counter-increment:mp;position:relative;padding:8px 12px 8px 38px;background:var(--blue-pale);border-radius:7px;font-size:12.5px;line-height:1.6;}
+.must-points li::before{content:counter(mp);position:absolute;left:10px;top:8px;width:18px;height:18px;border-radius:50%;background:var(--blue-deep);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.must-foot{font-size:12.5px;color:var(--ink-soft);line-height:1.7;border-top:1px dashed var(--grid);padding-top:8px;margin-top:2px;}
+.pri-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0 16px;}
+@media(max-width:640px){.pri-grid{grid-template-columns:1fr;}}
+.pri-col{background:#fff;border:1px solid var(--grid);border-radius:var(--radius);overflow:hidden;}
+.pri-col h4{font-size:13px;font-weight:700;color:#fff;padding:9px 14px;}
+.pri-col.new h4{background:var(--orange);}
+.pri-col.act h4{background:var(--blue-deep);}
+.pri-col ul{list-style:none;padding:10px 14px;}
+.pri-col li{font-size:13px;padding:4px 0 4px 16px;position:relative;}
+.pri-col li::before{content:"☑";position:absolute;left:0;color:var(--ok);}
+.ratio532{display:flex;gap:0;border-radius:8px;overflow:hidden;margin:8px 0 6px;height:38px;font-size:12px;font-weight:700;color:#fff;text-align:center;}
+.ratio532 div{display:flex;align-items:center;justify-content:center;}
+.r5{flex:5;background:var(--blue-deep);}
+.r3{flex:3;background:var(--blue-line);}
+.r2{flex:2;background:var(--orange);}
+.note-box{background:var(--blue-pale);border-radius:8px;padding:11px 14px;font-size:12.5px;color:var(--ink);margin-bottom:14px;}
+
+/* ===== スタンス ===== */
+.stance{background:#fff;border:1px solid var(--grid);border-radius:var(--radius);margin-bottom:12px;overflow:hidden;}
+.st-head{width:100%;display:flex;align-items:center;gap:10px;padding:13px 16px;background:none;border:none;cursor:pointer;text-align:left;font-family:inherit;}
+.st-head .t-word{font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:15px;color:var(--ink);flex:1;}
+.st-body{display:none;padding:0 16px 16px;font-size:13.5px;}
+.stance.open .st-body{display:block;}
+.st-body ul{list-style:none;}
+.st-body li{padding-left:16px;position:relative;margin-bottom:5px;}
+.st-body li::before{content:"🔥";position:absolute;left:0;font-size:10px;top:4px;}
+.st-body li li::before{content:"・";}
+.mkt-card{background:#fff;border:1px solid var(--grid);border-left:4px solid var(--blue-line);border-radius:var(--radius);padding:14px 16px;margin-bottom:12px;font-size:13.5px;}
+.mkt-card b.head{display:block;color:var(--blue-deep);font-size:14px;margin-bottom:6px;}
+.mkt-card ul{list-style:none;}
+.mkt-card li{padding-left:14px;position:relative;margin-bottom:4px;color:var(--ink);font-size:13px;}
+.mkt-card li::before{content:"・";position:absolute;left:0;color:var(--blue-line);}
+.big17{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px;}
+.big17 .b{flex:1;min-width:160px;background:var(--blue-deep);color:#fff;border-radius:var(--radius);padding:16px;text-align:center;}
+.big17 label{font-size:11px;color:#A9C4DC;display:block;}
+.big17 .v{font-family:'Noto Sans JP',sans-serif;font-weight:900;font-size:30px;}
+.big17 .v small{font-size:13px;font-weight:600;}
+
+/* ===== 切り返し ===== */
+.premise{background:var(--blue-deep);color:#E4EDF5;border-radius:var(--radius);padding:16px 18px;font-size:13px;margin-bottom:18px;line-height:1.9;}
+/* 整理版・大原則 */
+.premise2{background:var(--blue-deep);color:#E4EDF5;border-radius:var(--radius);padding:18px 20px;margin-bottom:6px;}
+.pr2-head{font-size:14.5px;font-weight:800;color:#fff;margin-bottom:8px;display:flex;align-items:center;gap:9px;}
+.pr2-head::before{content:"";width:4px;height:18px;background:var(--orange);border-radius:2px;}
+.pr2-lead{font-size:13px;line-height:1.8;color:#E4EDF5;margin-bottom:14px;}
+.pr2-lead b{color:#fff;}
+.pr2-steps{display:flex;align-items:stretch;gap:6px;margin-bottom:14px;}
+@media(max-width:720px){.pr2-steps{flex-direction:column;}.pr2-arr{transform:rotate(90deg);align-self:center;}}
+.pr2-step{flex:1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:9px;padding:11px 12px;display:flex;gap:9px;align-items:flex-start;}
+.pr2-step .pr2-no{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:var(--orange);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.pr2-step b{display:block;font-size:13px;color:#fff;margin-bottom:2px;}
+.pr2-step span{font-size:11px;line-height:1.5;color:#C6D6E5;}
+.pr2-arr{display:flex;align-items:center;color:#7FA3C4;font-weight:700;}
+.pr2-notes{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.pr2-notes li{font-size:12px;line-height:1.6;color:#D5E2EE;padding-left:16px;position:relative;}
+.pr2-notes li::before{content:"・";position:absolute;left:2px;color:var(--orange);font-weight:800;}
+.pr2-notes b{color:#fff;}
+/* フェーズナビ（切り返し） */
+.talk-nav{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
+.talk-nav-btn{font-family:inherit;font-size:12.5px;font-weight:700;padding:8px 13px;border-radius:8px;border:1.5px solid var(--grid);background:#fff;color:var(--ink-soft);cursor:pointer;transition:all .12s;}
+.talk-nav-btn:hover{border-color:var(--blue-line);color:var(--blue-deep);}
+.talk-nav-btn.on{background:var(--blue-deep);border-color:var(--blue-deep);color:#fff;}
+.talk-group-h{font-size:13px;font-weight:800;color:var(--blue-deep);margin:20px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--blue-deep);display:flex;align-items:center;gap:8px;}
+.talk-group-h .tg-ic{font-size:15px;}
+.talk-group-h .tg-cnt{margin-left:auto;font-size:11px;font-weight:600;color:var(--ink-soft);}
+.premise b{color:#fff;}
+.talk-card{background:#fff;border:1px solid var(--grid);border-radius:var(--radius);margin-bottom:12px;overflow:hidden;}
+.t-head{width:100%;display:flex;align-items:center;gap:10px;padding:13px 16px;background:none;border:none;cursor:pointer;text-align:left;font-family:inherit;}
+.t-word{font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:15px;color:var(--ink);flex:1;}
+.t-body{display:none;padding:0 16px 16px;}
+.talk-card.open .t-body{display:block;}
+.t-ng{font-size:12.5px;color:var(--bad);background:#FBEFEF;border-radius:6px;padding:8px 12px;margin-bottom:10px;}
+.t-meta{font-size:13px;margin-bottom:10px;line-height:1.7;}
+.t-meta b{color:var(--blue-deep);font-size:12px;letter-spacing:.06em;display:block;margin-bottom:2px;}
+.flow-label{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--blue-line);margin:14px 0 7px;}
+.talk-flow{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin-bottom:6px;}
+.flowstep{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;background:var(--blue-pale);color:var(--blue-deep);border-radius:6px;padding:4px 9px;}
+.flowstep .fn{width:16px;height:16px;border-radius:50%;background:var(--blue-deep);color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.flowarr{color:var(--ink-soft);font-size:10px;}
+.pat{margin-bottom:8px;background:#FFF9F4;border:1px solid #F4D8C4;border-left:3px solid var(--orange);border-radius:8px;padding:9px 12px;}
+.pat .tag{display:inline-block;font-size:10.5px;font-weight:700;color:#fff;background:var(--orange);border-radius:20px;padding:2px 10px;margin-bottom:5px;}
+.pat .pat-line{font-size:14px;color:var(--ink);line-height:1.7;}
+
+/* ===== マニュアル ===== */
+.man-filter{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
+.man-filter button{font-family:inherit;font-size:12px;font-weight:700;padding:6px 12px;border-radius:20px;border:1.5px solid var(--grid);background:#fff;color:var(--ink-soft);cursor:pointer;}
+.man-filter button.on{background:var(--blue-deep);border-color:var(--blue-deep);color:#fff;}
+.man-search{width:100%;font-family:inherit;font-size:14px;padding:10px 14px;border:1.5px solid var(--grid);border-radius:8px;margin-bottom:12px;background:#fff;}
+.man-search:focus{outline:none;border-color:var(--blue-line);}
+.lib-item{background:#fff;border:1px solid var(--grid);border-radius:var(--radius);padding:12px 14px;margin-bottom:8px;display:block;text-decoration:none;color:var(--ink);}
+.lib-item:hover{border-color:var(--blue-line);}
+.lib-title{font-size:14px;font-weight:700;color:var(--blue-deep);}
+.lib-title .star{color:var(--orange);}
+.lib-purpose{font-size:12.5px;color:var(--ink-soft);margin-top:2px;}
+.lib-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px;}
+.lib-tag{font-size:10.5px;font-weight:700;background:var(--blue-pale);color:var(--blue-deep);border-radius:3px;padding:1px 7px;}
+.lib-count{font-size:12px;color:var(--ink-soft);margin-bottom:10px;}
+
+/* ===== サマリー ===== */
+.sum-card{background:#fff;border:1px solid var(--grid);border-radius:var(--radius);padding:18px;margin-bottom:14px;}
+.sum-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.sum-name{font-size:13px;font-weight:700;min-width:128px;}
+.sum-bar-wrap{flex:1;height:14px;background:var(--blue-pale);border-radius:3px;overflow:hidden;}
+.sum-bar{height:100%;border-radius:3px;background:var(--blue-line);transition:width .25s;}
+.sum-bar.low{background:var(--bad);}
+.sum-bar.mid{background:var(--warn);}
+.sum-pct{font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;min-width:46px;text-align:right;}
+.btn{font-family:inherit;font-size:14px;font-weight:700;padding:12px 22px;border-radius:8px;border:none;background:var(--blue-deep);color:#fff;cursor:pointer;}
+.btn.orange{background:var(--orange);}
+.sum-note{font-size:12.5px;color:var(--ink-soft);margin-top:10px;}
+.weakest{background:#FDF3EC;border:1.5px solid var(--orange);border-radius:var(--radius);padding:14px 16px;font-size:13.5px;margin-bottom:14px;}
+.weakest b{color:var(--orange);}
+footer{max-width:1020px;margin:0 auto;padding:0 16px 40px;font-size:11.5px;color:var(--ink-soft);}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;}}
+/* ===== UX強化（追記） ===== */
+.p-head:hover,.t-head:hover,.st-head:hover,.must-head:hover{background:var(--blue-pale);}
+.p-head,.t-head,.st-head,.must-head{transition:background .15s;border-radius:8px;}
+.p-arrow{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--blue-pale);color:var(--blue-deep);display:flex;align-items:center;justify-content:center;font-size:11px;}
+.phase.open .p-arrow,.talk-card.open .p-arrow,.stance.open .p-arrow,.must-card.open .p-arrow{background:var(--orange);color:#fff;}
+.tap-hint{display:inline-block;font-size:10.5px;font-weight:700;color:var(--blue-line);background:var(--blue-pale);border-radius:20px;padding:2px 9px;margin-left:8px;vertical-align:middle;}
+.scroll-hint{font-size:11px;color:var(--ink-soft);text-align:center;padding:6px 0 0;display:none;}
+@media(max-width:680px){.scroll-hint{display:block;}}
+/* セクション導入カード */
+.intro{background:linear-gradient(180deg,#fff,var(--blue-pale));border:1px solid var(--grid);border-radius:var(--radius);padding:14px 16px;margin-bottom:16px;font-size:13.5px;color:var(--ink);display:flex;gap:12px;align-items:flex-start;}
+.intro .ico{flex-shrink:0;width:32px;height:32px;border-radius:8px;background:var(--blue-deep);color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;}
+.intro b{color:var(--blue-deep);}
+/* 進捗ドット（ロードマップ用） */
+.flow-chip.cleared{background:var(--ok);color:#fff;}
+/* セクションタイトル番号バッジ */
+.sec-title .sn{flex-shrink:0;width:26px;height:26px;border-radius:7px;background:var(--orange);color:#fff;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;}
+.sec-title::before{display:none;}
+/* チェック進捗バー */
+.chk-prog{display:flex;align-items:center;gap:8px;margin:6px 0 2px;font-size:11.5px;color:var(--ink-soft);}
+.chk-prog-bar{flex:1;height:6px;background:var(--blue-pale);border-radius:3px;overflow:hidden;}
+.chk-prog-fill{height:100%;background:var(--ok);border-radius:3px;width:0;transition:width .2s;}
+.chk-prog .n{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ok);}
+/* ボタン押下感 */
+.btn:active{transform:translateY(1px);}
+.rate button{transition:all .12s;}
+.rate button:hover{border-color:var(--blue-line);}
+/* ===== トークスクリプト ===== */
+.script-switch{display:flex;gap:8px;margin-bottom:14px;}
+.script-switch button{flex:1;font-family:inherit;font-size:14px;font-weight:800;padding:13px 10px;border-radius:10px;border:2px solid var(--grid);background:#fff;color:var(--ink-soft);cursor:pointer;transition:all .15s;}
+.script-switch button .ss-sub{display:block;font-size:11px;font-weight:500;margin-top:2px;}
+.script-switch button.on{background:var(--blue-deep);border-color:var(--blue-deep);color:#fff;}
+.script-switch button.on.teian{background:var(--orange);border-color:var(--orange);}
+.script-intro{background:linear-gradient(180deg,#fff,var(--blue-pale));border:1px solid var(--grid);border-radius:var(--radius);padding:14px 16px;margin-bottom:16px;font-size:13.5px;line-height:1.8;}
+.script-intro b{color:var(--blue-deep);}
+.script-intro .si-goal{display:inline-block;font-size:11.5px;font-weight:700;background:var(--orange);color:#fff;border-radius:20px;padding:3px 12px;margin-bottom:8px;}
+.sc-step{background:#fff;border:1px solid var(--grid);border-left:4px solid var(--blue-line);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;}
+.sc-step.teian{border-left-color:var(--orange);}
+.sc-head{width:100%;display:flex;align-items:center;gap:12px;padding:13px 16px;background:none;border:none;cursor:pointer;text-align:left;font-family:inherit;transition:background .15s;border-radius:8px;}
+.sc-head:hover{background:var(--blue-pale);}
+.sc-no{flex-shrink:0;width:30px;height:30px;border-radius:8px;background:var(--blue-deep);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;}
+.sc-step.teian .sc-no{background:var(--orange);}
+.sc-name{flex:1;font-size:14.5px;font-weight:700;color:var(--ink);}
+.sc-body{display:none;padding:0 16px 16px;}
+.sc-step.open .sc-body{display:block;}
+.sc-block{margin-top:12px;}
+.sc-block .lbl{font-size:11px;font-weight:700;letter-spacing:.1em;display:flex;align-items:center;gap:6px;margin-bottom:6px;}
+.sc-block .lbl::before{content:"";width:8px;height:8px;flex-shrink:0;}
+.sc-block.aim .lbl{color:var(--blue-line);}
+.sc-block.aim .lbl::before{background:var(--blue-line);}
+.sc-block.say .lbl{color:var(--orange);}
+.sc-block.say .lbl::before{background:var(--orange);}
+.sc-block.pt .lbl{color:var(--ok);}
+.sc-block.pt .lbl::before{background:var(--ok);}
+.sc-block.aim p{font-size:13.5px;color:var(--ink);}
+.sc-say{background:#FFF9F4;border:1px dashed var(--orange);border-radius:8px;padding:12px 14px;font-size:14px;line-height:1.85;color:var(--ink);}
+.sc-say .you{display:block;font-size:11px;font-weight:700;color:var(--orange);margin-bottom:3px;}
+.sc-pt{list-style:none;}
+.sc-pt li{font-size:13px;color:var(--ink-soft);padding:5px 10px 5px 24px;position:relative;background:#F0F6F2;border-radius:6px;margin-bottom:5px;}
+.sc-pt li::before{content:"✓";position:absolute;left:9px;color:var(--ok);font-weight:700;}
+.sc-pt li.ng{background:#FBEFEF;}
+.sc-pt li.ng::before{content:"✕";color:var(--bad);}
+/* ===== フェーズ内 台本アコーディオン（⑤統合） ===== */
+.script-acc{border:1.5px solid var(--orange);border-radius:10px;overflow:hidden;background:#FFFBF7;}
+.script-toggle{width:100%;display:flex;align-items:center;gap:10px;padding:12px 14px;background:none;border:none;cursor:pointer;text-align:left;font-family:inherit;transition:background .15s;}
+.script-toggle:hover{background:#FFF1E6;}
+.script-toggle .st-ic{font-size:16px;flex-shrink:0;}
+.script-toggle .st-tx{flex:1;font-size:13.5px;font-weight:800;color:var(--orange);}
+.script-acc .p-arrow{flex-shrink:0;}
+.script-acc.open .p-arrow{transform:rotate(90deg);background:var(--orange);color:#fff;}
+.script-acc-body{display:none;padding:0 14px 14px;}
+.script-acc.open .script-acc-body{display:block;}
+.sc-goal{display:flex;gap:8px;align-items:baseline;background:var(--orange);color:#fff;border-radius:8px;padding:9px 13px;font-size:13px;line-height:1.6;margin-bottom:10px;}
+.sc-goal b{font-size:10.5px;font-weight:800;letter-spacing:.06em;background:rgba(255,255,255,.22);border-radius:5px;padding:2px 7px;flex-shrink:0;}
+.script-acc-body .sc-intro{background:#fff;border:1px solid var(--grid);border-radius:8px;padding:12px 14px;font-size:13px;line-height:1.8;margin-bottom:12px;}
+.script-acc-body .sc-intro b{color:var(--orange);}
+.sc-steps{display:flex;flex-direction:column;gap:9px;}
+.script-acc-body .sc-step{border:1px solid var(--grid);border-left:4px solid var(--orange);border-radius:9px;padding:12px 14px;margin:0;}
+.sc-step-h{display:flex;align-items:center;gap:10px;margin-bottom:5px;}
+.sc-step-h .sc-no{width:24px;height:24px;border-radius:7px;font-size:12px;background:var(--orange);}
+.sc-step-h .sc-name{flex:1;font-size:14px;font-weight:800;color:var(--ink);}
+.sc-aim{font-size:12.5px;color:var(--ink-soft);line-height:1.7;margin-bottom:9px;}
+.sc-say{background:#FFF9F4;border:1px dashed var(--orange);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:8px;}
+.sc-say .sl{display:flex;gap:9px;align-items:flex-start;}
+.sc-say .sl-who{flex-shrink:0;font-size:10px;font-weight:800;border-radius:5px;padding:3px 8px;margin-top:2px;}
+.sc-say .sl.me .sl-who{background:var(--orange);color:#fff;}
+.sc-say .sl.cand .sl-who{background:#E3E9EE;color:var(--ink-soft);}
+.sc-say .sl p{font-size:13.5px;line-height:1.8;color:var(--ink);flex:1;}
+.sc-say .sl.cand p{color:var(--ink-soft);}
+.script-acc-body .sc-pt{list-style:none;margin-top:9px;display:flex;flex-direction:column;gap:5px;}
+.script-acc-body .sc-pt li{font-size:12.5px;color:var(--ink-soft);padding:6px 10px 6px 26px;position:relative;background:#F0F6F2;border-radius:6px;}
+.script-acc-body .sc-pt li::before{content:"✓";position:absolute;left:9px;top:6px;color:var(--ok);font-weight:700;}
+.script-acc-body .sc-pt li.pt-ng{background:#FBEFEF;}
+.script-acc-body .sc-pt li.pt-ng::before{content:"✕";color:var(--bad);}
+.sc-prep{display:flex;gap:6px;margin-bottom:8px;}
+.sc-prep span{font-size:10.5px;font-weight:700;color:#fff;background:var(--blue-line);border-radius:20px;padding:2px 10px;}
+/* ===== マネージャー視点チェック（マニュアル準拠・再設計） ===== */
+.mgr-nav{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px;}
+.mgr-nav-btn{font-family:inherit;font-size:12.5px;font-weight:700;padding:8px 14px;border-radius:8px;border:1.5px solid var(--grid);background:#fff;color:var(--ink-soft);cursor:pointer;transition:all .12s;}
+.mgr-nav-btn:hover{border-color:var(--blue-line);color:var(--blue-deep);}
+.mgr-nav-btn.on{background:var(--blue-deep);border-color:var(--blue-deep);color:#fff;}
+.mgr-sub{font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--blue-deep);margin:20px 0 8px;display:flex;align-items:center;gap:8px;}
+.mgr-sub::before{content:"";width:10px;height:10px;background:var(--blue-deep);border-radius:2px;flex-shrink:0;}
+.mgr-note{font-size:12.5px;color:var(--ink-soft);line-height:1.7;margin-bottom:10px;}
+.mgr-note b{color:var(--blue-deep);}
+/* 思想ヒーロー */
+.mgr-hero{background:var(--blue-deep);color:#E4EDF5;border-radius:var(--radius);padding:18px 20px;margin-bottom:8px;}
+.mgr-hero-lead{font-size:13.5px;line-height:1.85;color:#EAF1F8;}
+.mgr-hero-sub{font-size:11px;font-weight:800;letter-spacing:.1em;color:#A9C4DC;margin:16px 0 10px;}
+.watch-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:7px 14px;}
+@media(max-width:640px){.watch-list{grid-template-columns:1fr;}}
+.watch-list li{font-size:12.5px;color:#fff;line-height:1.5;display:flex;gap:9px;align-items:flex-start;}
+.watch-list .wn{flex-shrink:0;width:19px;height:19px;border-radius:50%;background:var(--orange);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+/* 3原則 */
+.mrule{background:#fff;border:1px solid var(--grid);border-left:4px solid var(--blue-line);border-radius:8px;padding:12px 15px;margin-bottom:8px;}
+.mrule-h{font-size:14px;font-weight:800;color:var(--blue-deep);display:flex;align-items:center;gap:9px;margin-bottom:5px;}
+.mrule-n{flex-shrink:0;font-size:10.5px;font-weight:800;color:#fff;background:var(--blue-deep);border-radius:20px;padding:2px 10px;}
+.mrule p{font-size:13px;color:var(--ink);line-height:1.7;}
+.mrule p b{color:var(--orange);}
+/* KPI4分類 */
+.k4-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+@media(max-width:640px){.k4-grid{grid-template-columns:1fr;}}
+.k4{background:#fff;border:1px solid var(--grid);border-top:3px solid var(--blue-line);border-radius:8px;padding:11px 14px;}
+.k4.t-量{border-top-color:#2D6BA8;}
+.k4.t-質{border-top-color:var(--orange);}
+.k4.t-速度{border-top-color:#1F7A4D;}
+.k4.t-管理{border-top-color:#6B4FA8;}
+.k4-t{font-size:13.5px;font-weight:800;color:var(--blue-deep);margin-bottom:3px;}
+.k4-b{font-size:12.5px;color:var(--ink);}
+.k4-ex{font-size:11.5px;color:var(--ink-soft);margin-top:4px;}
+/* 件数/率/実物 */
+.see3-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+@media(max-width:640px){.see3-grid{grid-template-columns:1fr;}}
+.see3{background:var(--blue-pale);border-radius:8px;padding:11px 14px;}
+.see3-t{font-size:13px;font-weight:800;color:var(--blue-deep);margin-bottom:3px;}
+.see3-b{font-size:12px;color:var(--ink);line-height:1.6;}
+/* 優先順位 */
+.prio-list{display:flex;flex-direction:column;gap:5px;}
+.prio{display:grid;grid-template-columns:30px 128px 1fr;gap:10px;align-items:center;background:#fff;border:1px solid var(--grid);border-radius:7px;padding:8px 12px;}
+@media(max-width:560px){.prio{grid-template-columns:26px 1fr;}.prio-w{grid-column:1/-1;padding-left:36px;}}
+.prio-r{font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:700;color:var(--orange);text-align:center;}
+.prio-s{font-size:13px;font-weight:700;color:var(--ink);}
+.prio-w{font-size:12px;color:var(--ink-soft);}
+/* 横断チェック タブ */
+.cross-tabs{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px;}
+.cross-tab{font-family:inherit;font-size:13px;font-weight:700;padding:9px 15px;border-radius:8px;border:1.5px solid var(--grid);background:#fff;color:var(--ink-soft);cursor:pointer;display:flex;align-items:center;gap:7px;transition:all .12s;}
+.cross-tab:hover{border-color:var(--blue-line);}
+.cross-tab.on{background:var(--orange);border-color:var(--orange);color:#fff;}
+.cross-ic{font-size:15px;}
+.cross-detail{background:#fff;border:1px solid var(--grid);border-radius:var(--radius);padding:16px 18px;}
+.cross-head{display:flex;gap:13px;align-items:flex-start;margin-bottom:6px;}
+.cross-ic-lg{font-size:26px;line-height:1;flex-shrink:0;}
+.cross-name{font-size:17px;font-weight:800;color:var(--blue-deep);}
+.cross-desc{font-size:12.5px;color:var(--ink-soft);line-height:1.6;margin-top:3px;}
+/* フェーズ別 chips */
+.mphase-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;}
+.mphase-chip{font-family:inherit;font-size:12.5px;font-weight:700;padding:8px 13px;border-radius:20px;border:1.5px solid var(--grid);background:#fff;color:var(--ink-soft);cursor:pointer;transition:all .12s;}
+.mphase-chip:hover{border-color:var(--blue-line);}
+.mphase-chip.on{background:var(--blue-deep);border-color:var(--blue-deep);color:#fff;}
+.mphase-detail{background:#fff;border:1px solid var(--grid);border-radius:var(--radius);padding:16px 18px;}
+.mphase-head{display:flex;gap:12px;align-items:flex-start;margin-bottom:4px;}
+.mphase-no{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:var(--blue-deep);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.mphase-name{font-size:17px;font-weight:800;color:var(--blue-deep);display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.mphase-tag{font-size:10.5px;font-weight:700;color:#fff;background:var(--orange);border-radius:20px;padding:2px 10px;}
+.mphase-see{font-size:12.5px;color:var(--ink-soft);line-height:1.6;margin-top:3px;}
+.mphase-flow{display:flex;flex-wrap:wrap;align-items:center;gap:5px;background:var(--blue-pale);border-radius:8px;padding:11px 13px;}
+.mpf{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--ink);background:#fff;border:1px solid var(--grid);border-radius:6px;padding:4px 9px;}
+.mpf-n{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;color:#fff;background:var(--blue-line);border-radius:50%;width:16px;height:16px;display:inline-flex;align-items:center;justify-content:center;}
+.mpf-arr{color:var(--blue-line);font-weight:700;font-size:11px;}
+/* チェックリスト（mgr用：項目＋OK基準） */
+.mgr-chk{list-style:none;}
+.mgr-chk li{margin-bottom:6px;}
+.mgr-chk label{display:flex;gap:9px;align-items:flex-start;font-size:13px;cursor:pointer;padding:8px 11px;border-radius:7px;background:var(--blue-pale);}
+.mgr-chk input{margin-top:3px;accent-color:var(--blue-deep);width:16px;height:16px;flex-shrink:0;}
+.mgr-chk label.done{background:#E6F2EB;}
+.mgr-chk label.done .ck-k{color:var(--ok);text-decoration:line-through;}
+.mgr-chk .ck-k{display:block;font-weight:700;color:var(--ink);}
+.mgr-chk .ck-v{display:block;font-size:11.5px;color:var(--ink-soft);margin-top:2px;}
+/* NG/OK 2カラム */
+.ngok{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;}
+@media(max-width:640px){.ngok{grid-template-columns:1fr;}}
+.ngok-col{border-radius:8px;padding:11px 14px;}
+.ngok-col.ng{background:#FBEFEF;border:1px solid #E9C9C9;}
+.ngok-col.ok{background:#E9F4EE;border:1px solid #C5E2D2;}
+.ngok-h{font-size:11.5px;font-weight:800;letter-spacing:.04em;margin-bottom:6px;}
+.ngok-col.ng .ngok-h{color:var(--bad);}
+.ngok-col.ok .ngok-h{color:var(--ok);}
+.ngok-col ul{list-style:none;}
+.ngok-col li{font-size:12.5px;color:var(--ink);line-height:1.6;padding:3px 0 3px 14px;position:relative;}
+.ngok-col.ng li::before{content:"×";position:absolute;left:0;color:var(--bad);font-weight:800;}
+.ngok-col.ok li::before{content:"○";position:absolute;left:0;color:var(--ok);font-weight:800;}
+/* KPI問題特定表 */
+.kpit{display:flex;flex-direction:column;gap:6px;}
+.kpit-row{display:grid;grid-template-columns:200px 18px 1fr 1fr;gap:10px;align-items:center;background:#fff;border:1px solid var(--grid);border-radius:8px;padding:10px 13px;}
+@media(max-width:760px){.kpit-row{grid-template-columns:1fr;gap:5px;}.kpit-arrow{display:none;}}
+.kpit-kpi{font-size:13px;font-weight:800;color:var(--bad);}
+.kpit-arrow{color:var(--ink-soft);font-weight:700;}
+.kpit-cause,.kpit-real{font-size:12px;color:var(--ink);line-height:1.55;}
+.kpit-l{display:block;font-size:10px;font-weight:800;letter-spacing:.06em;color:var(--ink-soft);margin-bottom:2px;}
+.kpit-real{color:var(--ink-soft);}
+/* 即介入 */
+.intv-list{display:flex;flex-direction:column;gap:6px;}
+.intv{display:grid;grid-template-columns:1fr 200px;gap:12px;align-items:center;background:#FFF9F4;border:1px solid #F2D9C4;border-left:4px solid var(--orange);border-radius:8px;padding:10px 14px;}
+@media(max-width:640px){.intv{grid-template-columns:1fr;gap:3px;}}
+.intv-s{font-size:13px;font-weight:700;color:var(--ink);}
+.intv-w{font-size:12px;color:var(--orange);font-weight:700;}
+/* 10問 */
+.ten-list{list-style:none;counter-reset:ten;display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;}
+@media(max-width:640px){.ten-list{grid-template-columns:1fr;}}
+.ten-list li{font-size:13px;color:var(--ink);line-height:1.5;display:flex;gap:9px;align-items:flex-start;background:#fff;border:1px solid var(--grid);border-radius:7px;padding:9px 12px;}
+.ten-list .tenn{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:var(--blue-deep);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+/* 良いNAの条件 */
+.nacond-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-top:8px;}
+@media(max-width:760px){.nacond-grid{grid-template-columns:1fr 1fr;}}
+.nacond{background:var(--blue-pale);border-radius:7px;padding:10px 12px;}
+.nacond-t{font-size:12.5px;font-weight:800;color:var(--blue-deep);margin-bottom:3px;}
+.nacond-b{font-size:11.5px;color:var(--ink);line-height:1.5;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="h-inner">
+    <div class="h-eyebrow">RECREE / JOBREE 建設 — JK_CP オンボーディング</div>
+    <h1>新人CP 立ち上げロードマップ</h1>
+    <div class="h-sub">JK_CPオンボーディングガイド準拠。実務フロー11フェーズ × 57マニュアル × 逆算KPI。最短で月5決定・売上1,000万へ。</div>
+    <div class="stamp">月5決定<br>達成</div>
+  </div>
+</header>
+
+<nav>
+  <div class="tabs" role="tablist">
+    <button class="tab active" data-panel="kpi">① 逆算KPI</button>
+    <button class="tab" data-panel="stance">② スタンス・市場構造</button>
+    <button class="tab" data-panel="ms">③ マイルストーン</button>
+    <button class="tab" data-panel="day">④ 1日の使い方・優先順位</button>
+    <button class="tab" data-panel="phase">⑤ CPロードマップ＋台本</button>
+    <button class="tab" data-panel="talk">⑥ 切り返しトーク</button>
+    <button class="tab" data-panel="mgr">⑦ マネージャー視点チェック</button>
+    <button class="tab" data-panel="lib">⑧ マニュアル一覧</button>
+    <button class="tab" data-panel="sum">⑨ 自己評価</button>
+  </div>
+</nav>
+<div class="scroll-hint">← タブは横スクロールできます →</div>
+
+<main>
+
+<!-- ===== ① KPI ===== -->
+<section class="panel active" id="panel-kpi">
+  <h2 class="sec-title"><span class="sn">1</span>月5決定・1,000万からの逆算KPI</h2>
+  <div class="intro"><div class="ico">i</div><div>このツールは上のタブで<b>8つのパート</b>に分かれています。学ぶ順番は<b>① 目標(KPI) → ② スタンス → ③ マイルストーン → ④ 1日の使い方 → ⑤ 実務(ロードマップ) → ⑥ 切り返し → ⑦ マニュアル → ⑧ 自己評価</b>。まずこのページで<b>「月5決定に必要な行動量」</b>を体に入れましょう。青い数字は<b>タップで書き換え可能</b>です。</div></div>
+  <p class="sec-lead">転換率は実績値ベース。自分の数字が出たら都度書き換えて、必要行動量を更新する。</p>
+  <div class="goalbar">
+    <div class="g"><label>月間決定目標</label><div class="val"><input type="number" id="g-kettei" value="5" min="1" step="1"> 件</div></div>
+    <div class="g"><label>平均単価（税込）</label><div class="val"><input type="number" id="g-tanka" value="200" min="50" step="10"> 万円</div></div>
+    <div class="g"><label>月間売上見込（税込）</label><div class="val rev mono" id="g-rev">1,000万円</div></div>
+  </div>
+  <div class="kpi-headline">
+    <span>有効面談からの決定率 <b id="h-kettei-rate">12%</b></span>
+    <span>有効面談からの面接設定率 <b>35%</b></span>
+  </div>
+  <div class="funnel" id="funnel">
+    <div class="f-row head"><div>工程</div><div>必要量</div><div style="text-align:right">転換率</div><div style="text-align:right">必要数/月</div></div>
+  </div>
+  <div class="sub-funnel">
+    <h3>内訳A｜有効面談 → 一次面接設定 までの工程内訳</h3>
+    <p class="sf-note">設定率35%の中身。どの工程で人数が削れているかを見る。</p>
+    <div id="subA"></div>
+    <div class="recon" id="reconA"></div>
+  </div>
+  <div class="sub-funnel">
+    <h3>内訳B｜一次面接設定 → 内定 までの選考内訳</h3>
+    <p class="sf-note">内定取得率41%の中身。一次・二次の通過と最終の歩留まり。</p>
+    <div id="subB"></div>
+    <div class="recon" id="reconB"></div>
+  </div>
+  <div class="daily">
+    <div class="d"><label>必要有効面談 / 週</label><div class="v" id="d-yuko">—</div></div>
+    <div class="d"><label>必要一次設定 / 週</label><div class="v" id="d-settei">—</div></div>
+    <div class="d"><label>必要内定 / 月</label><div class="v" id="d-naitei">—</div></div>
+  </div>
+  <p class="kpi-note">
+    ■ <b>有効面談 × 35% = 一次面接設定、× 41% = 内定、× 85% = 決定</b>。月5決定には有効面談が約41件/月（≒10件/週）必要。<br>
+    ■ 内訳Aの工程率（80%×70%×97%×75%）を全部やり切ると理論設定率は約41%。実績35%との差分＝工程の取りこぼし。<br>
+    ■ 通話時間1日3h以上（理想5h）・アクティブ比率5:3:2の行動基準は「④ 1日の使い方」を参照。
+  </p>
+  <div class="h3line">数字が落ちたときの診断（低いKPI → 見るフェーズ）</div>
+  <div id="diag-rows"></div>
+</section>
+
+<!-- ===== ② マイルストーン ===== -->
+<section class="panel" id="panel-ms">
+  <h2 class="sec-title"><span class="sn">3</span>マイルストーン及び目標</h2>
+  <p class="sec-lead"><b>目標：入社後1ヶ月目に2件の計上。その後も安定して計上を行い、1,200万円/3か月を達成すること。</b>スタンス／マインド含めて理解し、実践できるようになる。</p>
+
+  <div class="h3line">期間別マイルストーン</div>
+  <div class="ms-wrap">
+  <table class="ms">
+    <tr><th>期間</th><th>初回面談数</th><th>書類回収</th><th>1次面接設定</th><th>内定承諾</th><th>売上金額</th><th style="text-align:left">定性的なマイルストーン</th></tr>
+    <tr><td>入社3日以内</td><td>―</td><td>―</td><td>―</td><td>―</td><td>―</td><td class="q">掘り起こしロープレ合格＆面談獲得</td></tr>
+    <tr><td>入社7日以内</td><td class="num">5件</td><td class="num">4件</td><td>―</td><td>―</td><td>―</td><td class="q">求職者に違和感を与えない面談／書類回収までスムーズ／回収〜打診の流れを理解</td></tr>
+    <tr><td>入社14日以内</td><td class="num">14件</td><td class="num">11件</td><td class="num">5件</td><td>―</td><td>―</td><td class="q">提案ロープレ合格／適切なNA日時と内容が設定できる</td></tr>
+    <tr><td>入社1か月以内</td><td class="num">30件</td><td class="num">24件</td><td class="num">9件</td><td class="num">2件</td><td class="num">500万円</td><td class="q">メンターのサポートを受けながら承諾までの道筋を創れる／企業に対する交渉ができる</td></tr>
+    <tr><td>入社2か月以内</td><td class="num">30件/月</td><td class="num">24件/月</td><td class="num">12件</td><td class="num">3件/月</td><td class="num">500万円</td><td class="q">継続的な面談・設定の創出／次月の数字も考えて行動／適切に周りを頼って解決</td></tr>
+    <tr><td>入社3か月以内</td><td class="num">30件/月</td><td class="num">24件/月</td><td class="num">12件</td><td class="num">3件/月</td><td class="num">500万円</td><td class="q">デイリーの必要行動量を担保／ウィークリーで課題特定／事業所とも積極的なコミュニケーション</td></tr>
+  </table>
+  </div>
+
+  <div class="h3line">売上額（min / GOOD / GREAT）</div>
+  <div class="ms-wrap">
+  <table class="ms">
+    <tr><th>期間</th><th>min</th><th>GOOD</th><th>GREAT</th></tr>
+    <tr><td>入社1ヶ月目</td><td class="num">220万</td><td class="num">500万</td><td class="num">600万</td></tr>
+    <tr><td>入社2ヶ月目</td><td class="num">500万</td><td class="num">600万</td><td class="num">800万</td></tr>
+    <tr><td>入社3ヶ月目</td><td class="num">500万</td><td class="num">800万</td><td class="num">800万</td></tr>
+    <tr><td>入社4ヶ月目</td><td class="num">500万</td><td class="num">800万</td><td class="num">1000万</td></tr>
+    <tr><td>入社5ヶ月目</td><td class="num">500万</td><td class="num">800万</td><td class="num">1200万</td></tr>
+    <tr><td>入社6ヶ月目</td><td class="num">500万</td><td class="num">1000万</td><td class="num">1200万</td></tr>
+    <tr><td><b>合計</b></td><td class="num"><b>2720万</b></td><td class="num"><b>4400万</b></td><td class="num"><b>5600万</b></td></tr>
+  </table>
+  </div>
+
+  <div class="h3line">卒業までのステップ</div>
+  <div class="gradstep"><b>➡️ フェーズ0：入社初日</b><ul><li>レクリーのこと、レクリー業務をinput</li></ul></div>
+  <div class="gradstep"><b>➡️ フェーズ1：入社から3日以内</b><ul><li>基礎知識のインプット</li><li>掘り起こし面談ができるようになるためのロープレに合格</li></ul></div>
+  <div class="gradstep"><b>➡️ フェーズ2：入社7日以内</b><ul><li>求職者に違和感を与えない面談ができる（ラポール形成・ヒアリング漏れなし・書類回収）</li><li>提案ロープレの合格</li><li>面接設定までできる</li><li>両面CPとして、企業に対してのマインド醸成と両面の能力を身につける</li></ul></div>
+  <div class="gradstep"><b>➡️ フェーズ3：入社14日以内</b><ul><li>面談-提案-書類回収-打診-打診回収-設定までの適切なリードタイムとコンタクト（理想：面談後2営業日ごと／面談-書類回収2営業日で回収して打診）</li><li>企業に対して、内定取得に向けた具体的な交渉・調整ができる</li></ul></div>
+  <div class="gradstep"><b>➡️ フェーズ4：入社1か月以内</b><ul><li>メンターのサポートを受けながら、面談〜設定〜承諾の一連の流れを行える</li><li>内定承諾2件獲得</li><li>企業に交渉できる（内定獲得・手数料UP・年収UPの交渉）</li></ul></div>
+
+  <div class="h3line">入社後ギネス記録（ぜひ超えてください🔥）</div>
+  <div class="guin">
+    <div class="g"><label>入社後最速成約</label><div class="v">入社20日目</div></div>
+    <div class="g"><label>入社3ヶ月目の単月決定数</label><div class="v">7名</div></div>
+    <div class="g"><label>入社3ヶ月目の月売上</label><div class="v">1,200万</div></div>
+    <div class="g"><label>入社1ヶ月目の面接設定数</label><div class="v">8件</div></div>
+  </div>
+</section>
+
+<!-- ===== ③ CPロードマップ ===== -->
+<section class="panel" id="panel-phase">
+  <h2 class="sec-title"><span class="sn">5</span>CPロードマップ（実務フロー11フェーズ＋台本）</h2>
+  <p class="sec-lead">CP業務の全体像に準拠。各フェーズに「大事なこと（原文）・リードタイム基準・チェックリスト・一言目・関連マニュアル」を装備。マニュアルはタップでNotionが開く。<span class="tap-hint">各フェーズをタップで開閉</span></p>
+  <div class="flow-strip" id="flow-strip"></div>
+  <div id="phases"></div>
+</section>
+
+<!-- ===== ④ 1日の使い方 ===== -->
+<section class="panel" id="panel-day">
+  <h2 class="sec-title"><span class="sn">4</span>1日の使い方：成果を最大化するための業務設計</h2>
+  <p class="sec-lead">CP業務の本分は社内対応ではなく、求職者・企業に向き合い意思決定を前に進めること。時間の使い方に明確な優先順位を持つ。</p>
+
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-time">AM｜1.5時間ブロック</div><h4>午前中は打診回収の時間を必ず確保する</h4>
+      <p>打診した企業から選考可否・面接候補日・懸念点・追加確認事項を回収し、案件を前に進める。面接可能な反応があれば<b>その場でカレンダーを確認し、面接日程を押さえるところまで</b>行う。「確認します」で終わらせない。</p>
+      <ul><li>打診回収は面接設定数・実施数・売上に直結する。後回し＝他決・辞退・音信不通リスク</li></ul></div>
+    <div class="tl-item"><div class="tl-time">13:00〜｜通話3〜4h（理想5h）</div><h4>架電・打診・掘り起こしに集中する</h4>
+      <p>新規架電、掘り起こし架電、面談後NA、企業打診、打診回収など、直接成果につながる行動に時間を使う。重要なのは次アクション取得・意思決定の前進・設定/承諾につながる状態を作ること。</p></div>
+    <div class="tl-item"><div class="tl-time">日中</div><h4>Slackに時間を使いすぎない</h4>
+      <p>新規架電の即対応など緊急性が高いものを除き、Slackに業務を支配されない。「後で」機能・下書き・通知設定を活用。社内対応は成果そのものを生まない。</p></div>
+    <div class="tl-item"><div class="tl-time">終業前｜30〜45分</div><h4>翌日のアクサポ準備に使う</h4>
+      <p>相談案件を「誰が見ても状況が分かる状態」に整理する。最低限埋める情報：</p>
+      <ul><li>面談情報／求職者の希望条件／他社選考状況</li><li>現在のネクストアクション／想定されるNGシナリオ／企業側の懸念点</li><li>上長に相談したい論点／自分なりの仮説と対応案</li></ul>
+      <p style="margin-top:6px">アクサポは丸投げの場ではなく、<b>仮説を持って判断・助言をもらう場</b>。マネージャーは売上化可能性・辞退/他決リスク・温度感・次アクションの妥当性を見ている。AIは補助として活用してよい。</p></div>
+    <div class="tl-item"><div class="tl-time">終業前</div><h4>企業へのメール返信予約を行う</h4>
+      <p>面接日程調整・打診回収・選考結果確認などは返信遅れ＝案件停滞。当日処理と翌朝送付を切り分け、返信予約を活用する。</p></div>
+    <div class="tl-item"><div class="tl-time">退勤前</div><h4>日報で今日と明日の数字を把握して退勤する</h4>
+      <p>架電・通電・面談・打診・設定の数を曖昧にしたまま退勤しない。明日の面談予定・打診回収・架電対象・アクサポ案件を整理し、翌朝すぐ動ける状態を作る。<b>成果が出る人は翌日の準備を前日に終えている。</b></p></div>
+    <div class="tl-item"><div class="tl-time">随時</div><h4>オフライン同行・面談同席を積極的に活用する</h4>
+      <p>面接同行・面談同席・オフラインで求職者に会う機会を取りにいく。文章では掴めない温度感・意思決定の揺れを現場で学ぶ。</p></div>
+  </div>
+
+  <div class="h3line">CPアクティブ対応でマストで抑えるべき要点（9項目）</div>
+  <div id="must-list"></div>
+
+  <div class="h3line">アクティブ内のフェーズ割合 5:3:2</div>
+  <div class="ratio532"><div class="r5">面接設定以上 5</div><div class="r3">打診 3</div><div class="r2">提案 2</div></div>
+  <p class="note-box">この割合に常になっている状態＝書類回収LT・打診回収LT・面談の質が担保できている状態。崩れたら、どのリードタイムが伸びているかを疑う。</p>
+
+  <div class="h3line">タスク優先順位：「期待価値」で判断する</div>
+  <p class="note-box">「忙しい順」でも「来た順」でもなく、<b>“今やることで最も決定・売上につながる可能性が高い行動”</b>を優先する。期待価値＝①今やることで決定率がどれだけ上がるか ②今やらないことでどれだけ機会損失が出るか。優先順位とは「作業順」ではなく<b>「利益インパクト順」</b>。</p>
+  <p style="font-size:13.5px;margin-bottom:8px"><b>基本ルール：</b>① 原則、アクティブ対応を最優先（設定追加・3〜5社設定・打診◯後の即設定・面接前後フォロー・他決/辞退リスク潰し・クロージング）。面談を1件増やすより既存アクティブの設定を1件増やす方が期待価値が高いケースは多い。② ただし<b>新規即架電は例外的に優先度が高い</b>。新規リードは登録直後が最も通電率・面談化率が高く、“時間経過そのもの”で期待価値が下がる。</p>
+  <div class="pri-grid">
+    <div class="pri-col new"><h4>新規即架電を優先するケース</h4><ul>
+      <li>新規登録直後</li><li>まだ誰も接触していない</li><li>数十分で通電率低下が想定される</li><li>アクティブ側に緊急案件がない</li></ul></div>
+    <div class="pri-col act"><h4>アクティブ対応を優先するケース</h4><ul>
+      <li>内定承諾前</li><li>面接設定直前</li><li>他決・辞退リスクが高い</li><li>面接前後フォローが必要</li><li>高期待値候補者の設定追加が残っている</li></ul></div>
+  </div>
+  <p class="note-box">迷ったら：<b>今やらないことで何を失うか、今やることで何件決定に近づくか</b>で考える。</p>
+</section>
+
+<!-- ===== ⑤ スタンス ===== -->
+<section class="panel" id="panel-stance">
+  <h2 class="sec-title"><span class="sn">2</span>スタンス（Mindset）</h2>
+  <p class="sec-lead">スキルの前にスタンス。5つすべて、理解だけでなく実践できる状態を目指す。</p>
+  <div id="stances"></div>
+
+  <h2 class="sec-title" style="margin-top:30px">業界構造とレクリーの思想</h2>
+  <div class="big17">
+    <div class="b"><label>施工管理の有効求人倍率</label><div class="v">17<small>倍弱</small></div></div>
+    <div class="b"><label>参考：ITエンジニア</label><div class="v">4<small>倍</small></div></div>
+  </div>
+  <div class="mkt-card"><b class="head">マーケット構造</b><ul>
+    <li>需給バランスが大きく乖離。案件に溢れ、案件を実行する人がいない状態</li>
+    <li>求職者の集客が非常に難しく、マーケット全体で奪い合い。レクリーは集客が最も強いので勝てている</li>
+    <li>今後も奪い合いは加速するため<b>リファラルでの面談獲得が非常に重要</b></li>
+    <li>建設業は資格保有者がいないと案件受注が不可能＝施工管理採用する=売上が伸びる構造。だから手数料も年収も上がり続ける</li>
+  </ul></div>
+  <div class="mkt-card"><b class="head">レクリーの顧客は求職者ではなく企業である</b><ul>
+    <li>ビジネスモデルは「企業から報酬を得る」構造。最終的に価値提供すべき相手は企業であり、企業の採用成功がゴール</li>
+    <li>意思決定の基準は常に「企業の採用成功に繋がるかどうか」</li>
+    <li>企業の採用成功は「良い求職者をいかに早く・適切に届けるか」によってのみ実現される。求職者への価値提供の質とスピード＝企業価値</li>
+  </ul></div>
+  <div class="mkt-card"><b class="head">求職者のためにできることを全て最速でやる</b><ul>
+    <li>求職者は極めて希少で意思決定も早い。対応が遅れると他社で決まる。「検討する」「後でやる」は価値を生まない</li>
+    <li>即架電・即レス／面談の質の最大化（深掘り・解像度・条件緩和）／最適な求人の即時提案／選考の高速化（企業側コントロール含む）</li>
+    <li><b>「求職者のためにやり切ること」＝「企業への最大価値提供」</b></li>
+  </ul></div>
+  <p class="note-box">職種理解：レクリーがメインで扱う施工管理職はセグメントによって特徴が大きく異なる。「施工管理とは？」資料・職種分岐・クイズ①②はNotionオンボページから（⑧マニュアル一覧の「全般」参照）。</p>
+</section>
+
+<!-- ===== ⑥ 切り返し ===== -->
+<section class="panel" id="panel-talk">
+  <h2 class="sec-title"><span class="sn">6</span>切り返しトーク集（フェーズ別・網羅版）</h2>
+  <div class="premise2">
+    <div class="pr2-head">トップCAの大原則 ― 切り返しは「論破」ではなく「再接続」</div>
+    <p class="pr2-lead">断り文句は<b>拒絶ではなく「情報不足・タイミング・警戒」のサイン</b>。額面で受けて引かない。すべての切り返しは次の4ステップで組む。</p>
+    <div class="pr2-steps">
+      <div class="pr2-step"><span class="pr2-no">1</span><div><b>受け止め</b><span>まず感謝・肯定し、警戒を解く</span></div></div>
+      <div class="pr2-arr">→</div>
+      <div class="pr2-step"><span class="pr2-no">2</span><div><b>転換</b><span>断り文句の中の「条件付き」を拾い、別の論点にずらす</span></div></div>
+      <div class="pr2-arr">→</div>
+      <div class="pr2-step"><span class="pr2-no">3</span><div><b>価値接続</b><span>相手の転職理由・利益に紐づける（求人特徴は羅列しない）</span></div></div>
+      <div class="pr2-arr">→</div>
+      <div class="pr2-step"><span class="pr2-no">4</span><div><b>質問</b><span>ハードルの低い小さなYesを取り、案件を前に進める</span></div></div>
+    </div>
+    <ul class="pr2-notes">
+      <li>一言一句の暗記ではなく<b>「型」を体で覚える</b>。言葉遣い・雰囲気・受け止め方のノンバーバルが結果の大半を決める。</li>
+      <li>最終目的は<b>「案件を前に進めること」</b>。アポが無理でも「軸を一問だけ預かる／書類だけ預かる」で接点を残す。</li>
+    </ul>
+  </div>
+  <p class="sec-lead" style="margin-top:14px">フェーズごとに、よくある断り文句と切り返しの型・実トーク例をまとめています。<span class="tap-hint">各シーンをタップで開閉</span></p>
+  <div class="talk-nav" id="talk-nav"></div>
+  <div id="talks"></div>
+</section>
+
+<!-- ===== ⑧ マネージャー視点チェック ===== -->
+<section class="panel" id="panel-mgr">
+  <h2 class="sec-title"><span class="sn">7</span>マネージャー視点チェック</h2>
+  <p class="sec-lead">KPIは結果であり原因ではない。見るべきは、CPが各フェーズで<b>「次工程に進む理由」を求職者と企業の双方に作れているか</b>。下のナビで 思想・原則／横断チェック／フェーズ別／KPI問題特定／介入・NA を切り替える。<span class="tap-hint">タップで切替</span></p>
+  <div class="mgr-nav" id="mgr-nav"></div>
+  <div id="mgr-body"></div>
+</section>
+
+<!-- ===== ⑨ マニュアル ===== -->
+<section class="panel" id="panel-lib">
+  <h2 class="sec-title"><span class="sn">8</span>マニュアル一覧（入社後オンボーディング・全57件）</h2>
+  <p class="sec-lead">JK_CPオンボーディングガイド最下部のマニュアルDBを全件収録。タップでNotionの該当マニュアルが開く。★は最重要。</p>
+  <input type="text" class="man-search" id="man-search" placeholder="キーワードで検索（例：打診 / kintone / クロージング）">
+  <div class="man-filter" id="man-filter"></div>
+  <div class="lib-count" id="lib-count"></div>
+  <div id="lib-list"></div>
+</section>
+
+<!-- ===== ⑧ サマリー ===== -->
+<section class="panel" id="panel-sum">
+  <h2 class="sec-title"><span class="sn">9</span>自己評価サマリー</h2>
+  <p class="sec-lead">⑤CPロードマップで付けた自己評価（完璧=1.0／ほぼ=0.7／少し=0.3／できてない=0）の集計。週1回、アクサポ・1on1前に実施。</p>
+  <div class="weakest" id="weakest" style="display:none"></div>
+  <div class="sum-card" id="sum-card"><p style="font-size:13px;color:var(--ink-soft)">まだ評価が入力されていません。「③ CPロードマップ」の各フェーズ末尾で自己評価を付けてください。</p></div>
+  <button class="btn orange" id="copy-btn">評価結果をテキストでコピー（Slack/シート貼り付け用）</button>
+  <p class="sum-note">⚠ このページは保存機能を持ちません。<b>ページを閉じると評価はリセット</b>されるので、終わったら必ずコピーして管理シートに転記してください。</p>
+</section>
+
+</main>
+
+<footer>RECREE / ジョブリー建設 CPチーム内部資料｜JK_CP_オンボーディング ガイド（Notion）準拠｜逆算KPIは実績転換率ベースで随時更新</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
